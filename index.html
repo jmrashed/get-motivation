@@ -17,6 +17,9 @@
 
 <body class="animated-background">
     <div class="container">
+        <div class="visit-count-container">
+            <p id="visit-count">Visitor Count: Loading...</p>
+        </div>
         <div class="quote-container">
             <h1 class="quote-font" id="quote">Loading...</h1>
         </div>
@@ -30,6 +33,11 @@ $(document).ready(function () {
     ];
     var jsonPath = "assets/data/motivation.json";
     var quotes = [];
+
+    // Initialize visit count in localStorage if not present
+    if (localStorage.getItem('visitCount') === null) {
+        localStorage.setItem('visitCount', 0);
+    }
 
     function getRandomQuote() {
         if (quotes.length === 0) {
@@ -64,23 +72,35 @@ $(document).ready(function () {
         $("#quote").html(styledWords.join(' '));
     }
 
+    function updateVisitCount() {
+        // Get and update the visit count from localStorage
+        var count = parseInt(localStorage.getItem('visitCount'), 10);
+        count += 1;
+        localStorage.setItem('visitCount', count);
+        $("#visit-count").text("Visitor Count: " + count);
+    }
+
     $("#quote").css({
-            'font-family': getRandomFontFamily()
-        });
+        'font-family': getRandomFontFamily()
+    });
 
     $.getJSON(jsonPath, function (data) {
         quotes = data.motivational_sentences;
         updateQuote(); // Display a quote on initial load
+        updateVisitCount(); // Update and display visit count
     }).fail(function () {
         $("#quote").text("Failed to load quotes.");
     });
 
-    // Update quote on body click
+    // Update quote and visit count on body click
     $("body").on("click", function () {
         updateQuote();
+        updateVisitCount();
     });
-});
 
+    // Display initial visit count
+    $("#visit-count").text("Visitor Count: " + localStorage.getItem('visitCount'));
+});
     </script>
 </body>
 
