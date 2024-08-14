@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Motivational Quotes</title>
+    <!-- Bootstrap CSS CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <!-- jQuery CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <!-- Bootstrap JS CDN -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="./assets/css/styles.css">
+    <link rel="stylesheet" href="./assets/fonts/stylesheet.css">
+</head>
+
+<body class="animated-background">
+    <div class="container">
+        <div class="quote-container">
+            <h1 class="quote-font" id="quote">Loading...</h1>
+        </div>
+    </div>
+
+    <script>
+$(document).ready(function () {
+    var fontFamily = [
+        'Enhanced Dot Digital-7',
+        'Astronaut II'
+    ];
+    var jsonPath = "assets/data/motivation.json";
+    var quotes = [];
+
+    function getRandomQuote() {
+        if (quotes.length === 0) {
+            return "No quotes available.";
+        }
+        var randomIndex = Math.floor(Math.random() * quotes.length);
+        return quotes[randomIndex];
+    }
+
+    function getRandomColor() {
+        // Generate a random color in hex format
+        var letters = '0123456789ABCDEF';
+        var color = '#';
+        for (var i = 0; i < 6; i++) {
+            color += letters[Math.floor(Math.random() * 16)];
+        }
+        return color;
+    }
+
+    function getRandomFontFamily() {
+        // Select a random font family from the array
+        var randomIndex = Math.floor(Math.random() * fontFamily.length);
+        return fontFamily[randomIndex];
+    }
+
+    function updateQuote() {
+        var quote = getRandomQuote();
+        var words = quote.split(' ');
+        var styledWords = words.map(function(word) {
+            return `<span style="color: ${getRandomColor()}; }">${word}</span>`;
+        });
+        $("#quote").html(styledWords.join(' '));
+    }
+
+    $("#quote").css({
+            'font-family': getRandomFontFamily()
+        });
+
+    $.getJSON(jsonPath, function (data) {
+        quotes = data.motivational_sentences;
+        updateQuote(); // Display a quote on initial load
+    }).fail(function () {
+        $("#quote").text("Failed to load quotes.");
+    });
+
+    // Update quote on body click
+    $("body").on("click", function () {
+        updateQuote();
+    });
+});
+
+    </script>
+</body>
+
+</html>

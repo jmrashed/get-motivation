@@ -1,0 +1,61 @@
+@font-face {
+  font-family: "AstronautII";
+  src: url("assets/fonts/AstronautII.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+body,
+html {
+  height: 100%;
+  margin: 0;
+  overflow: hidden;
+  font-family: "Astronaut II";
+  cursor: pointer !important;
+}
+h1 {
+  font-family: "Astronaut II";
+}
+
+.animated-background {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fff;
+  font-size: 2em;
+  text-align: center;
+  animation: backgroundAnimation 10s infinite alternate;
+}
+
+@keyframes backgroundAnimation {
+  0% {
+    background-color: #ff6f61; /* Coral */
+  }
+  25% {
+    background-color: #ffccbc; /* Light Coral */
+  }
+  50% {
+    background-color: #6a1b9a; /* Deep Purple */
+  }
+  75% {
+    background-color: #ffab00; /* Amber */
+  }
+  100% {
+    background-color: #00acc1; /* Light Blue */
+  }
+}
+.quote-container {
+  padding: 20px;
+  text-align: center;
+  margin-top: 20%;
+}
+h1#quote {
+  font-size: 50px;
+}
+.quote-font {
+  font-size: 2rem;
+  line-height: 1.5;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5),
+    /* Slightly offset dark shadow */ -1px -1px 2px rgba(255, 255, 255, 0.8); /* Slightly offset light shadow */
+}

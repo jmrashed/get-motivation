@@ -1,0 +1,18 @@
+@font-face {
+    font-family: 'Astronaut II';
+    src: url('AstronautII.woff2') format('woff2'),
+        url('AstronautII.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Enhanced Dot Digital-7';
+    src: url('EnhancedDotDigital-7.woff2') format('woff2'),
+        url('EnhancedDotDigital-7.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
